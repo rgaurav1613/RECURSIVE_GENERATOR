@@ -6,16 +6,16 @@ st.set_page_config(page_title="Incident Recurrence Tool", layout="wide")
 
 st.title("📊 Weekly Recurrent Incident Analyzer")
 
-current_file = st.file_uploader("Upload Current Week Excel", type=["xlsx"])
-previous_file = st.file_uploader("Upload Previous Week Excel", type=["xlsx"])
+current_file = st.file_uploader("Upload Current Week Excel", type=["xlsx" , "csv"])
+previous_file = st.file_uploader("Upload Previous Week Excel", type=["xlsx" , "csv"])
 
 if st.button("Generate Report"):
     if current_file and previous_file:
         os.makedirs("output", exist_ok=True)
 
-        current_path = "output/current.xlsx"
-        previous_path = "output/previous.xlsx"
-        output_path = "output/Recurrent_Incident_Report.xlsx"
+        current_path = "output/current.csv"
+        previous_path = "output/previous.csv"
+        output_path = "output/Recurrent_Incident_Report.csv"
 
         with open(current_path, "wb") as f:
             f.write(current_file.getbuffer())
@@ -31,7 +31,7 @@ if st.button("Generate Report"):
             st.download_button(
                 label="📥 Download Recurrent Incident Report",
                 data=f,
-                file_name="Recurrent_Incident_Report.xlsx"
+                file_name="Recurrent_Incident_Report.csv"
             )
     else:
         st.warning("⚠ Please upload both Excel files")
